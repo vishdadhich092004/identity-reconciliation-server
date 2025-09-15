@@ -1,0 +1,28 @@
+{
+  "name": "bitespeed-ir",
+  "version": "1.0.0",
+  "description": "backend service for identity reconciliation for bitespeed",
+  "license": "ISC",
+  "author": "vish",
+  "type": "commonjs",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev":"nodemon src/index.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.16.1",
+    "@prisma/extension-accelerate": "^2.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.4.0",
+    "nodemon": "^3.1.10",
+    "prisma": "^6.16.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2"
+  }
+}

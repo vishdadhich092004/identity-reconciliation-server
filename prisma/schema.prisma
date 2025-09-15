@@ -1,0 +1,35 @@
+// Prisma schema for Bitespeed: Contact model used for identity reconciliation
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Enum for link precedence
+enum LinkPrecedence {
+  primary
+  secondary
+}
+
+model Contact {
+  id            Int             @id @default(autoincrement())
+  phoneNumber   String?         @db.VarChar(50)
+  email         String?         @db.VarChar(255)
+  linkedId      Int?
+  linkPrecedence LinkPrecedence @default(primary)
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  deletedAt     DateTime?
+
+  // Self-relation: a Contact can link to another Contact (the primary)
+  linked        Contact?        @relation("ContactRelation", fields: [linkedId], references: [id])
+  secondaries   Contact[]       @relation("ContactRelation")
+
+  @@index([email], name: "idx_contact_email")
+  @@index([phoneNumber], name: "idx_contact_phone")
+  @@index([linkedId], name: "idx_contact_linkedId")
+}
