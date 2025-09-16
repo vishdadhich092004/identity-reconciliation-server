@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import prisma from "./db/prisma.client";
-import identityRoutes from "./routes/identity.routes";
+import identifyRoutes from "./routes/identify.routes";
 dotenv.config();
 
 const app = express();
@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
     res.send("Hola from identity reconciliation service backend :)");
 });
 
-app.use("/api/v1/identity", identityRoutes);
+app.use("/api/v1/identify", identifyRoutes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
