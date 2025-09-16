@@ -51,6 +51,14 @@ export const identify = async (req: Request, res: Response) => {
         const nonPrimaryMatches = matchingContacts.filter(c => c.linkPrecedence === "secondary" && c.linkedId !== truePrimary.id);
         await Promise.all(nonPrimaryMatches.map(c => convertPrimaryToSecondaryContact(c.id, truePrimary.id)));
 
+        // check if payload email/phone combination doesn't exist in any contact
+        const payloadExists = matchingContacts.some(c => c.email === email && c.phoneNumber === phoneNumber);
+        
+        // create new secondary if payload combination is new
+        if (!payloadExists) {
+            await createNewSecondaryContact(email, phoneNumber, truePrimary.id);
+        }
+
         const updatedSecondaries = await findSecondaryContactsByPrimaryId(truePrimary.id);
         return res.status(200).json(convertToResponseFormat(truePrimary, updatedSecondaries));
     }
