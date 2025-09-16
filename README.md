@@ -1,4 +1,7 @@
-## BiteSpeed Identity Reconciliation (IR)
+## Identity Reconciliation Service
+
+🔗 [**Live Link**](https://identity-reconciliation-server.vercel.app/)
+
 
 A minimal Express + TypeScript + Prisma service that reconciles user identities across email and phone, ensuring a single primary contact with linked secondary contacts.
 
